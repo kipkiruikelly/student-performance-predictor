@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🎓 Student Performance Predictor</h1>
+            <p>Enter the student's mid-semester details to predict their outcome</p>
+        </div>
+
+        <!-- Show error if there is one -->
+        {% if error %}
+        <div class="error-box">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/predict" method="POST">
+
+            <div class="form-group">
+                <label>Number of Absences</label>
+                <input type="number" name="absences" min="0" max="100"
+                       placeholder="e.g. 4" required>
+                <small>How many classes has the student missed?</small>
+            </div>
+
+            <div class="form-group">
+                <label>First Term Grade (G1)</label>
+                <input type="number" name="G1" min="0" max="20"
+                       placeholder="e.g. 12" required>
+                <small>Grade out of 20</small>
+            </div>
+
+            <div class="form-group">
+                <label>Second Term Grade (G2)</label>
+                <input type="number" name="G2" min="0" max="20"
+                       placeholder="e.g. 13" required>
+                <small>Grade out of 20</small>
+            </div>
+
+            <div class="form-group">
+                <label>Weekly Study Time</label>
+                <select name="studytime" required>
+                    <option value="">-- Select --</option>
+                    <option value="1">Less than 2 hours</option>
+                    <option value="2">2 to 5 hours</option>
+                    <option value="3">5 to 10 hours</option>
+                    <option value="4">More than 10 hours</option>
+                </select>
+                <small>How many hours does the student study per week?</small>
+            </div>
+
+            <div class="form-group">
+                <label>Number of Past Failures</label>
+                <input type="number" name="failures" min="0" max="4"
+                       placeholder="e.g. 0" required>
+                <small>How many units has the student failed before?</small>
+            </div>
+
+            <div class="form-group">
+                <label>Mother's Education Level</label>
+                <select name="Medu" required>
+                    <option value="">-- Select --</option>
+                    <option value="0">None</option>
+                    <option value="1">Primary School</option>
+                    <option value="2">Middle School</option>
+                    <option value="3">Secondary School</option>
+                    <option value="4">University</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Father's Education Level</label>
+                <select name="Fedu" required>
+                    <option value="">-- Select --</option>
+                    <option value="0">None</option>
+                    <option value="1">Primary School</option>
+                    <option value="2">Middle School</option>
+                    <option value="3">Secondary School</option>
+                    <option value="4">University</option>
+                </select>
+            </div>
+
+            <button type="submit" class="predict-btn">
+                🔍 Predict Performance
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

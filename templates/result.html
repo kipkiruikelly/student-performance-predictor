@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🎓 Student Performance Predictor</h1>
+            <p>Prediction Result</p>
+        </div>
+
+        <!-- Result box changes colour based on Pass or Fail -->
+        <div class="result-box {{ 'pass' if result == 'Pass' else 'fail' }}">
+
+            {% if result == 'Pass' %}
+                <div class="result-icon">✅</div>
+                <h2>PASS</h2>
+                <p>This student is likely to pass.</p>
+            {% else %}
+                <div class="result-icon">❌</div>
+                <h2>FAIL</h2>
+                <p>This student may be at risk of failing.</p>
+            {% endif %}
+
+            <div class="confidence">
+                Confidence: <strong>{{ confidence }}%</strong>
+            </div>
+
+        </div>
+
+        <!-- Advice section -->
+        <div class="advice-box">
+            {% if result == 'Pass' %}
+                <h3>📋 Advisor Note</h3>
+                <p>The student appears to be on track. Continue to monitor
+                   their progress and encourage consistent study habits.</p>
+            {% else %}
+                <h3>📋 Advisor Note</h3>
+                <p>This student has been flagged as at risk. It is recommended
+                   to schedule an advisory session, review attendance records,
+                   and provide additional academic support before the end of
+                   the semester.</p>
+            {% endif %}
+        </div>
+
+        <a href="/" class="back-btn">← Predict Another Student</a>
+
+    </div>
+
+</body>
+</html>
